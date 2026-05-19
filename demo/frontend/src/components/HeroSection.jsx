@@ -40,8 +40,8 @@ export default function HeroSection() {
 
         <p className="text-slate-400 text-lg sm:text-xl max-w-2xl mx-auto mb-4 leading-relaxed">
           Fine-tuning a UNet semantic segmentation model on the{" "}
-          <span className="text-slate-300 font-medium">MappingAfrica</span> dataset to detect
-          flooded agricultural fields in Zambia from 4-channel satellite imagery.
+          <span className="text-slate-300 font-medium">MappingAfrica</span> dataset to segment
+          agricultural fields in Zambia and classify them as flooded or non-flooded using 4-channel satellite imagery.
         </p>
 
         <p className="text-slate-500 text-sm max-w-xl mx-auto mb-12">
