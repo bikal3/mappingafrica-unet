@@ -1,0 +1,39 @@
+{
+  "permissions": {
+    "allow": [
+      "PowerShell(\\(Get-ChildItem \"c:\\\\Users\\\\bikal\\\\Documents\\\\durupooo-project\\\\assignment3\\\\mappingafrica-256\\\\images\" | Measure-Object\\).Count; \\(Get-ChildItem \"c:\\\\Users\\\\bikal\\\\Documents\\\\durupooo-project\\\\assignment3\\\\mappingafrica-256\\\\labels\" | Measure-Object\\).Count)",
+      "PowerShell($nb = Get-Content \"c:\\\\Users\\\\bikal\\\\Documents\\\\durupooo-project\\\\assignment3\\\\assignment3.ipynb\" | ConvertFrom-Json; $nb.cells[10..25] | Where-Object {$_.cell_type -eq \"code\"} | ForEach-Object {Write-Host \"=== CODE CELL ===\" -ForegroundColor Yellow; $_.source -join \"\"})",
+      "PowerShell($nb = Get-Content \"c:\\\\Users\\\\bikal\\\\Documents\\\\durupooo-project\\\\assignment3\\\\assignment3.ipynb\" | ConvertFrom-Json; $nb.cells[25..40] | Where-Object {$_.cell_type -eq \"code\" -or $_.cell_type -eq \"markdown\"} | ForEach-Object {if\\($_.cell_type -eq \"markdown\"\\){Write-Host \"=== MARKDOWN ===\" -ForegroundColor Cyan; \\($_.source -join \"\"\\)} else {Write-Host \"=== CODE CELL ===\" -ForegroundColor Yellow; \\($_.source -join \"\"\\).substring\\(0, [Math]::Min\\(500, \\($_.source -join \"\"\\).Length\\)\\)}})",
+      "PowerShell(Get-ChildItem \"c:\\\\Users\\\\bikal\\\\Documents\\\\durupooo-project\\\\assignment3\\\\checkpoints\"; \\(Get-ChildItem \"c:\\\\Users\\\\bikal\\\\Documents\\\\durupooo-project\\\\assignment3\\\\predictions\\\\HardScore\" | Measure-Object\\).Count)",
+      "PowerShell(\\(Get-Content \"c:\\\\Users\\\\bikal\\\\Documents\\\\durupooo-project\\\\assignment3\\\\assignment3.ipynb\" | ConvertFrom-Json\\).cells.Count)",
+      "PowerShell(node --version)",
+      "PowerShell(npm --version)",
+      "PowerShell(python --version)",
+      "PowerShell($nodePath = \"C:\\\\Program Files\\\\nodejs\\\\node.exe\"; $npmPath = \"C:\\\\Program Files\\\\nodejs\\\\npm.cmd\"; if \\(Test-Path $nodePath\\) { & $nodePath --version } else { Write-Host \"Node not in default path\" }; Get-Command python3 -ErrorAction SilentlyContinue; Get-Command py -ErrorAction SilentlyContinue)",
+      "PowerShell(conda env list)",
+      "PowerShell(conda install -c conda-forge nodejs -y 2>&1)",
+      "PowerShell(conda run node --version)",
+      "PowerShell(conda run npm --version)",
+      "PowerShell(conda run -n torch-env pip install fastapi uvicorn python-multipart aiofiles -q 2>&1)",
+      "PowerShell(Invoke-RestMethod \"http://localhost:8000/api/metrics\" -ErrorAction SilentlyContinue)",
+      "PowerShell($r = Invoke-WebRequest \"http://localhost:8000/api/sample/ZM1622949_2021-08/satellite\" -ErrorAction SilentlyContinue; Write-Host \"Status: $\\($r.StatusCode\\) | Content-Type: $\\($r.Headers['Content-Type']\\) | Size: $\\($r.Content.Length\\) bytes\")",
+      "PowerShell(ls \"c:\\\\Users\\\\bikal\\\\Documents\\\\durupooo-project\\\\assignment3\\\\finetune_mappingafrica_256\\\\mappingafrica-256\\\\images\" | Select-Object -First 5; \\(ls \"c:\\\\Users\\\\bikal\\\\Documents\\\\durupooo-project\\\\assignment3\\\\finetune_mappingafrica_256\\\\mappingafrica-256\\\\images\"\\).Count)",
+      "PowerShell(ls \"c:\\\\Users\\\\bikal\\\\Documents\\\\durupooo-project\\\\assignment3\\\\finetune_mappingafrica_256\\\\mappingafrica-256\\\\images\" | Where-Object { $_.Name -ge \"ZM1\" } | Select-Object -First 10 | Select-Object Name)",
+      "PowerShell(cmd /c \"dir /b c:\\\\Users\\\\bikal\\\\Documents\\\\durupooo-project\\\\assignment3\\\\finetune_mappingafrica_256\\\\mappingafrica-256\\\\images | head -5\")",
+      "PowerShell(cmd /c \"dir /b c:\\\\Users\\\\bikal\\\\Documents\\\\durupooo-project\\\\assignment3\\\\finetune_mappingafrica_256\\\\mappingafrica-256\\\\images 2>&1\")",
+      "PowerShell(Invoke-RestMethod \"http://localhost:8000/api/sample/ZM1622949_2021-08/satellite\" -OutFile \"c:\\\\Users\\\\bikal\\\\Documents\\\\test_img.png\" -ErrorAction SilentlyContinue; if \\(Test-Path \"c:\\\\Users\\\\bikal\\\\Documents\\\\test_img.png\"\\) { \"Image downloaded successfully: $\\(\\(Get-Item 'c:\\\\Users\\\\bikal\\\\Documents\\\\test_img.png'\\).Length\\) bytes\" } else { \"Failed\" })",
+      "PowerShell(Start-Process -FilePath \"conda\" -ArgumentList \"run -n torch-env uvicorn main:app --host 0.0.0.0 --port 8000\" -WorkingDirectory \"c:\\\\Users\\\\bikal\\\\Documents\\\\durupooo-project\\\\assignment3\\\\demo\\\\api\" -WindowStyle Hidden)",
+      "PowerShell(Invoke-RestMethod \"http://localhost:8000/api/sample/ZM1622949_2021-08/satellite\" -OutFile \"c:\\\\Users\\\\bikal\\\\Documents\\\\test_img.png\" -ErrorAction SilentlyContinue; if \\(Test-Path \"c:\\\\Users\\\\bikal\\\\Documents\\\\test_img.png\"\\) { \"Image: $\\(\\(Get-Item 'c:\\\\Users\\\\bikal\\\\Documents\\\\test_img.png'\\).Length\\) bytes\" } else { \"Failed - maybe still starting, trying again...\"; Start-Sleep -Seconds 3; Invoke-RestMethod \"http://localhost:8000/api/sample/ZM1622949_2021-08/satellite\" -OutFile \"c:\\\\Users\\\\bikal\\\\Documents\\\\test_img.png\" -ErrorAction Stop; \"$\\(\\(Get-Item 'c:\\\\Users\\\\bikal\\\\Documents\\\\test_img.png'\\).Length\\) bytes\" })",
+      "PowerShell(Invoke-RestMethod \"http://localhost:8000/api/debug-paths\" -ErrorAction SilentlyContinue 2>&1)",
+      "PowerShell(Invoke-RestMethod \"http://localhost:8000/api/debug\" -ErrorAction SilentlyContinue)",
+      "PowerShell(Invoke-RestMethod \"http://localhost:8000/api/sample/ZM1622949_2021-08/satellite\" -OutFile \"c:\\\\Users\\\\bikal\\\\Documents\\\\test_img.png\"; if \\(Test-Path \"c:\\\\Users\\\\bikal\\\\Documents\\\\test_img.png\"\\) { \"SUCCESS: $\\(\\(Get-Item 'c:\\\\Users\\\\bikal\\\\Documents\\\\test_img.png'\\).Length\\) bytes\" })",
+      "PowerShell(Invoke-RestMethod \"http://localhost:8000/api/sample/ZM1622949_2021-08/prediction\" -OutFile \"c:\\\\Users\\\\bikal\\\\Documents\\\\test_pred.png\"; \"$\\(\\(Get-Item 'c:\\\\Users\\\\bikal\\\\Documents\\\\test_pred.png'\\).Length\\) bytes\"; Invoke-RestMethod \"http://localhost:8000/api/sample/ZM1622949_2021-08/label\" -OutFile \"c:\\\\Users\\\\bikal\\\\Documents\\\\test_label.png\"; \"$\\(\\(Get-Item 'c:\\\\Users\\\\bikal\\\\Documents\\\\test_label.png'\\).Length\\) bytes\")",
+      "PowerShell(cmd /c \"dir /b c:\\\\Users\\\\bikal\\\\Documents\\\\durupooo-project\\\\assignment3\\\\finetune_mappingafrica_256\\\\mappingafrica-256\\\\labels 2>&1\" | Select-Object -First 5; \\(cmd /c \"dir /b c:\\\\Users\\\\bikal\\\\Documents\\\\durupooo-project\\\\assignment3\\\\finetune_mappingafrica_256\\\\mappingafrica-256\\\\labels 2>&1\"\\).Count)",
+      "PowerShell(Invoke-RestMethod \"http://localhost:8000/api/debug\")",
+      "PowerShell(New-Item -ItemType Directory -Force \"c:\\\\Users\\\\bikal\\\\Documents\\\\durupooo-project\\\\assignment3\\\\.github\\\\workflows\")",
+      "PowerShell(conda run git --version 2>&1)",
+      "PowerShell(conda install -c conda-forge git -y 2>&1)",
+      "PowerShell(conda run git --version)"
+    ]
+  }
+}

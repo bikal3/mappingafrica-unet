@@ -1,0 +1,25 @@
+# Large model files — do not commit
+*.pth
+checkpoints/
+
+# Python
+__pycache__/
+*.pyc
+*.pyo
+.env
+
+# Node
+demo/frontend/node_modules/
+demo/frontend/dist/
+
+# Jupyter checkpoints
+.ipynb_checkpoints/
+
+# Data — too large for git
+mappingafrica-256/
+finetune_mappingafrica_256/mappingafrica-256/images/
+finetune_mappingafrica_256/mappingafrica-256/labels/
+
+# Keep the catalog CSVs and generated PNGs
+!finetune_mappingafrica_256/*.csv
+!demo/frontend/public/images/
