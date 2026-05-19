@@ -1,25 +1,54 @@
-# Large model files — do not commit
+# ── Model weights (too large for git) ─────────────────────────────────────────
 *.pth
+*.pt
+*.ckpt
 checkpoints/
 
-# Python
+# ── Python ─────────────────────────────────────────────────────────────────────
 __pycache__/
-*.pyc
-*.pyo
+*.py[cod]
+*$py.class
+*.so
+.Python
 .env
+.venv
+env/
+venv/
+*.egg-info/
+dist/
+build/
+.eggs/
 
-# Node
+# ── Jupyter ────────────────────────────────────────────────────────────────────
+.ipynb_checkpoints/
+*.ipynb_checkpoints
+
+# ── Node / frontend ────────────────────────────────────────────────────────────
 demo/frontend/node_modules/
 demo/frontend/dist/
+demo/frontend/.env
+demo/frontend/.env.local
+demo/frontend/.env.*.local
 
-# Jupyter checkpoints
-.ipynb_checkpoints/
-
-# Data — too large for git
+# ── Raw satellite data (large .tif files) ─────────────────────────────────────
 mappingafrica-256/
 finetune_mappingafrica_256/mappingafrica-256/images/
 finetune_mappingafrica_256/mappingafrica-256/labels/
 
-# Keep the catalog CSVs and generated PNGs
+# Keep catalog CSVs and pre-converted PNGs
 !finetune_mappingafrica_256/*.csv
 !demo/frontend/public/images/
+
+# ── OS / editor ────────────────────────────────────────────────────────────────
+.DS_Store
+Thumbs.db
+desktop.ini
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# ── Logs & temp ────────────────────────────────────────────────────────────────
+*.log
+*.tmp
+*.cache
