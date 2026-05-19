@@ -8,8 +8,8 @@ const splitData = [
 ];
 
 const classData = [
-  { name: "Flooded Field", value: 15, color: "#1e90ff" },
-  { name: "Non-flooded", value: 72, color: "#22c55e" },
+  { name: "Agricultural Field (Class 2)", value: 15, color: "#1e90ff" },
+  { name: "Agricultural Field (Class 1)", value: 72, color: "#22c55e" },
   { name: "Null / Other", value: 13, color: "#475569" },
 ];
 
@@ -19,7 +19,7 @@ const dataCards = [
   { label: "Fine-tune Set", value: "650", sub: "500 train + 100 val + 50 test" },
   { label: "Countries", value: "5+", sub: "Angola, Zambia, Malawi…" },
   { label: "Temporal Range", value: "2017–2023", sub: "Multi-year satellite imagery" },
-  { label: "Task", value: "3-class", sub: "Flooded / Non-flooded / Null" },
+  { label: "Task", value: "3-class", sub: "Agricultural Field / Null" },
 ];
 
 export default function DatasetSection() {
@@ -29,7 +29,7 @@ export default function DatasetSection() {
         <SectionHeader
           badge="Dataset"
           title="MappingAfrica Satellite Data"
-          sub="Multi-spectral 4-channel satellite imagery for flood field segmentation across Africa"
+          sub="Multi-spectral 4-channel satellite imagery for agricultural field segmentation across Africa"
         />
 
         <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-4 mt-12">
@@ -85,8 +85,8 @@ export default function DatasetSection() {
           <div className="grid sm:grid-cols-3 gap-4">
             {[
               { color: "#3c3c3c", name: "Null / Background", desc: "No label data available" },
-              { color: "#22c55e", name: "Non-flooded Field", desc: "Agricultural land, not flooded" },
-              { color: "#1e90ff", name: "Flooded Field", desc: "Inundated agricultural land" },
+              { color: "#22c55e", name: "Agricultural Field (Class 1)", desc: "Cultivated agricultural land" },
+              { color: "#1e90ff", name: "Agricultural Field (Class 2)", desc: "Cultivated agricultural land" },
             ].map((c) => (
               <div key={c.name} className="flex items-start gap-3">
                 <div className="w-4 h-4 rounded mt-0.5 flex-shrink-0" style={{ backgroundColor: c.color }} />

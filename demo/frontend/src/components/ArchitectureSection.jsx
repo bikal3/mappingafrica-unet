@@ -88,7 +88,7 @@ export default function ArchitectureSection() {
             <Row label="Final Layer" value="Conv2d(64, 3, 1×1)" />
             <Row label="Model Size" value="~498 MB" />
             <Row label="Loss Function" value="CrossEntropyLoss" />
-            <Row label="Classes" value="3 (null, non-flood, flood)" />
+            <Row label="Classes" value="3 (null, field class 1, field class 2)" />
           </div>
         </div>
       </div>

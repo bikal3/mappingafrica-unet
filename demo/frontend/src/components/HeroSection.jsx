@@ -32,16 +32,16 @@ export default function HeroSection() {
         </div>
 
         <h1 className="text-4xl sm:text-6xl font-bold text-white mb-4 leading-tight">
-          Satellite Flood
+          Satellite Agricultural
           <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-400 to-cyan-400">
-            {" "}Field Detection
+            {" "}Field Segmentation
           </span>
         </h1>
 
         <p className="text-slate-400 text-lg sm:text-xl max-w-2xl mx-auto mb-4 leading-relaxed">
           Fine-tuning a UNet semantic segmentation model on the{" "}
           <span className="text-slate-300 font-medium">MappingAfrica</span> dataset to segment
-          agricultural fields in Zambia and classify them as flooded or non-flooded using 4-channel satellite imagery.
+          agricultural fields in Zambia from 4-channel satellite imagery.
         </p>
 
         <p className="text-slate-500 text-sm max-w-xl mx-auto mb-12">

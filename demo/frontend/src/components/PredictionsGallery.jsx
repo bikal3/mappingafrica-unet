@@ -102,8 +102,8 @@ function Modal({ sampleId, onClose }) {
         <div className="mt-4 flex gap-2 flex-wrap">
           {[
             { color: "#3c3c3c", label: "Null / Background" },
-            { color: "#22c55e", label: "Non-flooded Field" },
-            { color: "#1e90ff", label: "Flooded Field" },
+            { color: "#22c55e", label: "Agricultural Field (Class 1)" },
+            { color: "#1e90ff", label: "Agricultural Field (Class 2)" },
           ].map(({ color, label }) => (
             <span
               key={label}
@@ -167,8 +167,8 @@ export default function PredictionsGallery() {
         <div className="mt-6 bg-slate-800/40 border border-slate-700/50 rounded-xl p-4 flex flex-wrap gap-4 justify-center">
           {[
             { color: "#3c3c3c", label: "Null / Background" },
-            { color: "#22c55e", label: "Non-flooded Field" },
-            { color: "#1e90ff", label: "Flooded Field" },
+            { color: "#22c55e", label: "Agricultural Field (Class 1)" },
+            { color: "#1e90ff", label: "Agricultural Field (Class 2)" },
           ].map(({ color, label }) => (
             <div key={label} className="flex items-center gap-2 text-sm text-slate-400">
               <span className="w-4 h-4 rounded flex-shrink-0" style={{ backgroundColor: color }} />
