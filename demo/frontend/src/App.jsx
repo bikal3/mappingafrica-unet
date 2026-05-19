@@ -9,8 +9,19 @@ import PredictionsGallery from "./components/PredictionsGallery";
 
 function Footer() {
   return (
-    <footer className="py-8 px-6 border-t border-slate-800 text-center text-slate-600 text-sm">
+    <footer className="py-8 px-6 border-t border-slate-800 text-center text-slate-600 text-sm space-y-2">
       <p>Satellite Agricultural Field Segmentation · UNet Fine-tuning · MappingAfrica Dataset</p>
+      <p>
+        By <span className="text-slate-400">Bikal Shrestha</span> ·{" "}
+        <a
+          href="https://github.com/bikal3/mappingafrica-unet"
+          target="_blank"
+          rel="noopener noreferrer"
+          className="text-blue-400 hover:text-blue-300 underline"
+        >
+          GitHub Repository
+        </a>
+      </p>
     </footer>
   );
 }
