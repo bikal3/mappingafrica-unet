@@ -1,6 +1,6 @@
 # MappingAfrica UNet — Satellite Agricultural Field Segmentation
 
-Fine-tuning a UNet semantic segmentation model on the [MappingAfrica](https://github.com/agroimpacts/mapME) dataset to segment agricultural fields in Zambia from 4-channel satellite imagery.
+Fine-tuning a UNet semantic segmentation model on the [MappingAfrica](https://github.com/agroimpacts/ftw-mappingafrica-integration) dataset to segment agricultural fields in Zambia from 4-channel satellite imagery.
 
 **Live demo →** https://bikal3.github.io/mappingafrica-unet/
 
