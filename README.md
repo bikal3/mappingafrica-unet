@@ -118,18 +118,6 @@ conda run -n torch-env python demo/convert_images.py
 
 ---
 
-## Deployment
-
-The site deploys automatically to GitHub Pages via GitHub Actions on every push to `main`.
-
-To enable it on a fresh fork:
-1. Go to **Settings → Pages → Source → GitHub Actions**
-2. Push any commit to trigger the workflow
-
-**Live URL** — `https://<your-username>.github.io/<repo-name>/`
-
----
-
 ## Tech Stack
 
 | Layer | Technology |
