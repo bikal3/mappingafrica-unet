@@ -33,7 +33,10 @@
       "PowerShell(New-Item -ItemType Directory -Force \"c:\\\\Users\\\\bikal\\\\Documents\\\\durupooo-project\\\\assignment3\\\\.github\\\\workflows\")",
       "PowerShell(conda run git --version 2>&1)",
       "PowerShell(conda install -c conda-forge git -y 2>&1)",
-      "PowerShell(conda run git --version)"
+      "PowerShell(conda run git --version)",
+      "Bash(git add *)",
+      "Bash(git commit -m ' *)",
+      "Bash(git push *)"
     ]
   }
 }
