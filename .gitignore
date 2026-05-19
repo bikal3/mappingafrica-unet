@@ -18,6 +18,7 @@ venv/
 dist/
 build/
 .eggs/
+data/
 
 # ── Jupyter ────────────────────────────────────────────────────────────────────
 .ipynb_checkpoints/
