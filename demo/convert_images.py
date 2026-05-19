@@ -2,7 +2,7 @@
 Pre-convert all satellite .tif files and prediction/label masks to PNG
 for static GitHub Pages deployment.
 
-Run from assignment3/ directory:
+Run from the project root directory:
   conda run -n torch-env python demo/convert_images.py
 """
 

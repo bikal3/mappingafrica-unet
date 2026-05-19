@@ -1,6 +1,6 @@
 # Start the demo: FastAPI backend + open browser
-# Run from the assignment3/ directory:
-#   cd assignment3; .\demo\start.ps1
+# Run from the project root directory:
+#   cd <project-root>; .\demo\start.ps1
 
 $scriptDir = Split-Path -Parent $MyInvocation.MyCommand.Path
 $apiDir = Join-Path $scriptDir "api"

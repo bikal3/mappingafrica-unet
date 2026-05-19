@@ -28,7 +28,7 @@ export default function HeroSection() {
       <div className="relative z-10 max-w-4xl text-center">
         <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-blue-500/10 border border-blue-500/30 text-blue-400 text-xs font-medium mb-6">
           <span className="w-2 h-2 rounded-full bg-blue-400 animate-pulse" />
-          Deep Learning · Assignment 3
+          Deep Learning · UNet Fine-tuning
         </div>
 
         <h1 className="text-4xl sm:text-6xl font-bold text-white mb-4 leading-tight">

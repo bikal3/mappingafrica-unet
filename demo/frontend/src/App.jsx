@@ -10,7 +10,7 @@ import PredictionsGallery from "./components/PredictionsGallery";
 function Footer() {
   return (
     <footer className="py-8 px-6 border-t border-slate-800 text-center text-slate-600 text-sm">
-      <p>Assignment 3 · Satellite Semantic Segmentation · UNet Fine-tuning · MappingAfrica Dataset</p>
+      <p>Satellite Flood Field Segmentation · UNet Fine-tuning · MappingAfrica Dataset</p>
     </footer>
   );
 }
