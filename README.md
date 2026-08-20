@@ -52,7 +52,17 @@ Training ran for 10 epochs with Adam (lr=1e-4) and CrossEntropyLoss on 500 sampl
 
 - **Image size** — 256×256 pixels, 4 spectral channels
 - **Region** — Zambia (ZM)
-- **Classes** — 3 (non-field, field interior, field boundary)
+- **Classes** — 3, following the Fields of The World convention:
+
+| id | Colour | Class | Mean share of test pixels |
+|---|---|---|---|
+| 0 | `#3c3c3c` | Non-field — land outside any agricultural field | 68.5% |
+| 1 | `#228b22` | Field interior | 29.3% |
+| 2 | `#1e90ff` | Field boundary — the edge between adjacent fields | 2.3% |
+
+Class 0 is *not* missing data: `null_prop` is 0.0000 for every row of
+`catalog_fixed.csv`. Class 0 tracks the catalog's `nonfld_prop` and classes 1+2
+together track `fld_prop`, both at r = 0.9999.
 
 ---
 
@@ -81,6 +91,7 @@ mappingafrica-unet/
     │   └── public/images/             # Pre-converted PNGs for static deploy
     ├── convert_images.py              # Converts .tif → PNG for static site
     ├── make_og_image.py               # Builds the social preview image
+    ├── check_consistency.py           # Verifies displayed figures vs shipped images
     ├── start.sh                       # Starts both servers (macOS/Linux)
     └── start.ps1                      # Starts both servers (Windows)
 ```
@@ -118,6 +129,18 @@ conda run -n torch-env uvicorn main:app --reload --host 0.0.0.0 --port 8000 \
 cd demo/frontend && conda run -n torch-env npm run dev
 ```
 
+### Checks
+
+```bash
+cd demo/frontend && npm run lint     # ESLint
+python demo/check_consistency.py     # figures vs the shipped image files
+```
+
+`check_consistency.py` asserts that the class colours, class shares, sample list
+and training metrics agree across `src/data/project.js`, `demo/api/main.py`,
+`demo/convert_images.py` and the mask PNGs themselves. CI runs both on every
+push and pull request, and again before any deploy.
+
 ### Re-generate static images (if raw .tif files are available)
 
 ```powershell
@@ -135,3 +158,4 @@ conda run -n torch-env python demo/convert_images.py
 | Backend (local) | FastAPI, uvicorn |
 | Frontend | React, Vite, Tailwind CSS, Recharts |
 | Deploy | GitHub Actions, GitHub Pages |
+| Checks | ESLint, `check_consistency.py` |
