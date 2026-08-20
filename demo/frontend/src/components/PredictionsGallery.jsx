@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useRef, useEffect } from "react";
 import { ChevronLeft, ChevronRight, Eye } from "lucide-react";
 import { SectionHeader } from "./Task1Section";
 import { SAMPLE_IDS, CLASS_LEGEND } from "../data/project";
@@ -11,9 +11,11 @@ function imgPath(type, sampleId) {
 
 function SampleCard({ sampleId, onClick }) {
   return (
-    <div
-      className="bg-slate-800/50 border border-slate-700/50 rounded-xl overflow-hidden cursor-pointer hover:border-blue-500/50 hover:shadow-lg hover:shadow-blue-500/10 transition-all group"
-      onClick={() => onClick(sampleId)}
+    <button
+      type="button"
+      onClick={(e) => onClick(sampleId, e.currentTarget)}
+      aria-label={`Compare sample ${sampleId} with ground truth`}
+      className="block w-full text-left bg-slate-800/50 border border-slate-700/50 rounded-xl overflow-hidden hover:border-blue-500/50 hover:shadow-lg hover:shadow-blue-500/10 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-400 transition-all group"
     >
       <div className="grid grid-cols-2">
         <div className="relative aspect-square overflow-hidden">
@@ -42,25 +44,43 @@ function SampleCard({ sampleId, onClick }) {
         <span className="text-xs font-mono text-slate-500">{sampleId}</span>
         <Eye size={13} className="text-slate-600 group-hover:text-blue-400 transition-colors" />
       </div>
-    </div>
+    </button>
   );
 }
 
 function Modal({ sampleId, onClose }) {
+  const ref = useRef(null);
+  const titleId = `sample-${sampleId}-title`;
+
+  useEffect(() => {
+    // showModal gives us a focus trap, Escape-to-close and inert background
+    // content that a plain div cannot.
+    ref.current?.showModal();
+    const prev = document.body.style.overflow;
+    document.body.style.overflow = "hidden";
+    return () => {
+      document.body.style.overflow = prev;
+    };
+  }, []);
+
   return (
-    <div
-      className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/70 backdrop-blur-sm"
-      onClick={onClose}
+    <dialog
+      ref={ref}
+      onClose={onClose}
+      onClick={(e) => {
+        if (e.target === ref.current) ref.current.close();
+      }}
+      aria-labelledby={titleId}
+      className="m-auto w-[calc(100%-2rem)] max-w-2xl bg-transparent p-0 backdrop:bg-black/70 backdrop:backdrop-blur-sm"
     >
-      <div
-        className="bg-slate-900 border border-slate-700 rounded-2xl p-6 max-w-2xl w-full"
-        onClick={(e) => e.stopPropagation()}
-      >
+      <div className="bg-slate-900 border border-slate-700 rounded-2xl p-6">
         <div className="flex items-center justify-between mb-4">
-          <h3 className="text-white font-semibold font-mono text-sm">{sampleId}</h3>
+          <h3 id={titleId} className="text-white font-semibold font-mono text-sm">{sampleId}</h3>
           <button
-            onClick={onClose}
-            className="text-slate-500 hover:text-white transition-colors text-xl leading-none"
+            type="button"
+            onClick={() => ref.current?.close()}
+            aria-label="Close comparison"
+            className="text-slate-500 hover:text-white focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-400 rounded transition-colors text-xl leading-none px-1"
           >
             ×
           </button>
@@ -99,13 +119,23 @@ function Modal({ sampleId, onClose }) {
           ))}
         </div>
       </div>
-    </div>
+    </dialog>
   );
 }
 
 export default function PredictionsGallery() {
   const [page, setPage] = useState(0);
   const [selected, setSelected] = useState(null);
+  const triggerRef = useRef(null);
+
+  const openSample = (id, el) => {
+    triggerRef.current = el;
+    setSelected(id);
+  };
+  const closeSample = () => {
+    setSelected(null);
+    triggerRef.current?.focus();
+  };
 
   const totalPages = Math.ceil(SAMPLE_IDS.length / PAGE_SIZE);
   const pageSamples = SAMPLE_IDS.slice(page * PAGE_SIZE, (page + 1) * PAGE_SIZE);
@@ -121,15 +151,17 @@ export default function PredictionsGallery() {
 
         <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-5 mt-10">
           {pageSamples.map((id) => (
-            <SampleCard key={id} sampleId={id} onClick={setSelected} />
+            <SampleCard key={id} sampleId={id} onClick={openSample} />
           ))}
         </div>
 
         <div className="flex items-center justify-center gap-4 mt-8">
           <button
+            type="button"
             onClick={() => setPage((p) => Math.max(0, p - 1))}
             disabled={page === 0}
-            className="p-2 rounded-lg bg-slate-800 border border-slate-700 disabled:opacity-30 hover:bg-slate-700 transition-colors"
+            aria-label="Previous page"
+            className="p-2 rounded-lg bg-slate-800 border border-slate-700 disabled:opacity-30 hover:bg-slate-700 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-400 transition-colors"
           >
             <ChevronLeft size={18} className="text-slate-300" />
           </button>
@@ -137,9 +169,11 @@ export default function PredictionsGallery() {
             Page {page + 1} of {totalPages}&nbsp;·&nbsp;{SAMPLE_IDS.length} total samples
           </span>
           <button
+            type="button"
             onClick={() => setPage((p) => Math.min(totalPages - 1, p + 1))}
             disabled={page === totalPages - 1}
-            className="p-2 rounded-lg bg-slate-800 border border-slate-700 disabled:opacity-30 hover:bg-slate-700 transition-colors"
+            aria-label="Next page"
+            className="p-2 rounded-lg bg-slate-800 border border-slate-700 disabled:opacity-30 hover:bg-slate-700 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-400 transition-colors"
           >
             <ChevronRight size={18} className="text-slate-300" />
           </button>
@@ -155,7 +189,7 @@ export default function PredictionsGallery() {
         </div>
       </div>
 
-      {selected && <Modal sampleId={selected} onClose={() => setSelected(null)} />}
+      {selected && <Modal sampleId={selected} onClose={closeSample} />}
     </section>
   );
 }
