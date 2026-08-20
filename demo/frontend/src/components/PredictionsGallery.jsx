@@ -1,22 +1,7 @@
 import { useState } from "react";
 import { ChevronLeft, ChevronRight, Eye } from "lucide-react";
 import { SectionHeader } from "./Task1Section";
-
-const ALL_SAMPLES = [
-  "ZM1622949_2021-08","ZM1634599_2021-08","ZM1634645_2021-08","ZM1656379_2021-08",
-  "ZM1702968_2021-08","ZM1706637_2021-08","ZM1712155_2021-08","ZM1716286_2021-08",
-  "ZM1717612_2021-08","ZM1719919_2021-08","ZM1829067_2021-08","ZM1841419_2021-08",
-  "ZM1858604_2021-08","ZM1888408_2021-08","ZM1911527_2021-08","ZM1921657_2021-08",
-  "ZM1933346_2021-08","ZM1935028_2021-08","ZM1975354_2021-08","ZM1986959_2021-08",
-  "ZM2011173_2021-08","ZM2033581_2021-08","ZM2079799_2021-08","ZM2096868_2021-08",
-  "ZM2117591_2021-08","ZM2131550_2021-08","ZM2137844_2021-08","ZM2139930_2021-08",
-  "ZM2145201_2021-08","ZM2160265_2021-08","ZM2169968_2021-08","ZM2187890_2021-08",
-  "ZM2211915_2021-08","ZM2213703_2021-08","ZM2219002_2021-08","ZM2220204_2021-08",
-  "ZM2236432_2021-08","ZM2264538_2021-08","ZM2267070_2021-08","ZM2275008_2021-08",
-  "ZM2288316_2021-08","ZM2293344_2021-08","ZM2295370_2021-08","ZM2295847_2021-08",
-  "ZM2304141_2021-08","ZM2304231_2021-08","ZM2305901_2021-08","ZM2310085_2021-08",
-  "ZM2310176_2021-08","ZM2311332_2021-08",
-];
+import { SAMPLE_IDS } from "../data/project";
 
 const PAGE_SIZE = 6;
 
@@ -126,8 +111,8 @@ export default function PredictionsGallery() {
   const [page, setPage] = useState(0);
   const [selected, setSelected] = useState(null);
 
-  const totalPages = Math.ceil(ALL_SAMPLES.length / PAGE_SIZE);
-  const pageSamples = ALL_SAMPLES.slice(page * PAGE_SIZE, (page + 1) * PAGE_SIZE);
+  const totalPages = Math.ceil(SAMPLE_IDS.length / PAGE_SIZE);
+  const pageSamples = SAMPLE_IDS.slice(page * PAGE_SIZE, (page + 1) * PAGE_SIZE);
 
   return (
     <section id="gallery" className="py-24 px-6 bg-slate-900/40">
@@ -153,7 +138,7 @@ export default function PredictionsGallery() {
             <ChevronLeft size={18} className="text-slate-300" />
           </button>
           <span className="text-slate-400 text-sm">
-            Page {page + 1} of {totalPages}&nbsp;·&nbsp;{ALL_SAMPLES.length} total samples
+            Page {page + 1} of {totalPages}&nbsp;·&nbsp;{SAMPLE_IDS.length} total samples
           </span>
           <button
             onClick={() => setPage((p) => Math.min(totalPages - 1, p + 1))}

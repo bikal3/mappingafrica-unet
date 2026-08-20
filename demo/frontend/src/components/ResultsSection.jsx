@@ -2,13 +2,11 @@ import {
   LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer,
 } from "recharts";
 import { SectionHeader } from "./Task1Section";
+import { EPOCHS, TRAINING_METRICS, FINAL_METRICS } from "../data/project";
 import { TrendingDown, TrendingUp } from "lucide-react";
 
-const epochs = [1,2,3,4,5,6,7,8,9,10];
-const trainLoss  = [0.5446,0.5035,0.4776,0.4597,0.4486,0.4458,0.4408,0.4320,0.4272,0.4229];
-const valLoss    = [0.5567,0.5133,0.4811,0.4809,0.4626,0.4538,0.4587,0.4555,0.4503,0.4456];
-const valAcc     = [0.7891,0.8018,0.8147,0.8091,0.8181,0.8224,0.8190,0.8188,0.8193,0.8210];
-const valMiou    = [0.3994,0.4072,0.4099,0.4126,0.4109,0.4136,0.4148,0.4116,0.4154,0.4118];
+const epochs = EPOCHS;
+const { trainLoss, valLoss, valAcc, valMiou } = TRAINING_METRICS;
 
 const lossData = epochs.map((e, i) => ({
   epoch: e,
@@ -39,10 +37,10 @@ export default function ResultsSection() {
       {/* Final metrics */}
       <div className="grid grid-cols-2 sm:grid-cols-4 gap-4 mt-12">
         {[
-          { label: "Final Train Loss", value: "0.4229", icon: TrendingDown, color: "text-blue-400", bg: "bg-blue-500/10" },
-          { label: "Final Val Loss", value: "0.4456", icon: TrendingDown, color: "text-purple-400", bg: "bg-purple-500/10" },
-          { label: "Test Pixel Accuracy", value: "81.79%", icon: TrendingUp, color: "text-green-400", bg: "bg-green-500/10" },
-          { label: "Test mIoU", value: "43.31%", icon: TrendingUp, color: "text-amber-400", bg: "bg-amber-500/10" },
+          { label: "Final Train Loss", value: trainLoss.at(-1).toFixed(4), icon: TrendingDown, color: "text-blue-400", bg: "bg-blue-500/10" },
+          { label: "Final Val Loss", value: valLoss.at(-1).toFixed(4), icon: TrendingDown, color: "text-purple-400", bg: "bg-purple-500/10" },
+          { label: "Test Pixel Accuracy", value: `${(FINAL_METRICS.pixelAccuracy * 100).toFixed(2)}%`, icon: TrendingUp, color: "text-green-400", bg: "bg-green-500/10" },
+          { label: "Test mIoU", value: `${(FINAL_METRICS.miou * 100).toFixed(2)}%`, icon: TrendingUp, color: "text-amber-400", bg: "bg-amber-500/10" },
         ].map((m) => (
           <div key={m.label} className={`${m.bg} border border-slate-700/40 rounded-2xl p-5 text-center`}>
             <m.icon className={`${m.color} mx-auto mb-2`} size={24} />
