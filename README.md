@@ -80,7 +80,9 @@ mappingafrica-unet/
     │   │   └── components/
     │   └── public/images/             # Pre-converted PNGs for static deploy
     ├── convert_images.py              # Converts .tif → PNG for static site
-    └── start.ps1                      # Starts both servers locally
+    ├── make_og_image.py               # Builds the social preview image
+    ├── start.sh                       # Starts both servers (macOS/Linux)
+    └── start.ps1                      # Starts both servers (Windows)
 ```
 
 ---
@@ -93,21 +95,27 @@ mappingafrica-unet/
 
 ### Start both servers
 
+```bash
+# macOS / Linux, from the project root
+./demo/start.sh
+```
+
 ```powershell
-# From the project root
+# Windows, from the project root
 .\demo\start.ps1
 ```
 
+Both scripts use the `torch-env` environment; set `CONDA_ENV` to override.
+
 Or start them separately:
 
-```powershell
+```bash
 # Backend (http://localhost:8000)
-conda run -n torch-env uvicorn main:app --reload --host 0.0.0.0 --port 8000 `
+conda run -n torch-env uvicorn main:app --reload --host 0.0.0.0 --port 8000 \
   --app-dir demo/api
 
 # Frontend (http://localhost:5173)
-cd demo/frontend
-conda run npm run dev
+cd demo/frontend && conda run -n torch-env npm run dev
 ```
 
 ### Re-generate static images (if raw .tif files are available)
