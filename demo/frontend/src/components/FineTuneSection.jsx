@@ -66,7 +66,7 @@ export default function FineTuneSection() {
                   className={`flex items-center justify-between rounded-lg px-4 py-2.5 border transition-colors ${
                     l.frozen
                       ? "bg-slate-900/60 border-slate-700/40"
-                      : "bg-blue-500/8 border-blue-500/30"
+                      : "bg-blue-500/10 border-blue-500/30"
                   }`}
                 >
                   <div className="flex items-center gap-3">
