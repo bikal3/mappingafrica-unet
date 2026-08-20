@@ -1,4 +1,5 @@
 import { SectionHeader } from "./Task1Section";
+import { CLASS_LEGEND } from "../data/project";
 import { PieChart, Pie, Cell, Tooltip, ResponsiveContainer, Legend } from "recharts";
 
 const splitData = [
@@ -7,11 +8,14 @@ const splitData = [
   { name: "Test", value: 50, color: "#10b981" },
 ];
 
-const classData = [
-  { name: "Agricultural Field (Class 2)", value: 15, color: "#1e90ff" },
-  { name: "Agricultural Field (Class 1)", value: 72, color: "#22c55e" },
-  { name: "Null / Other", value: 13, color: "#475569" },
-];
+// Approximate pixel proportions, keyed to the class ids in CLASS_LEGEND so the
+// chart and the legend below it can never drift apart.
+const CLASS_SHARE = { 0: 13, 1: 72, 2: 15 };
+const classData = CLASS_LEGEND.map((c) => ({
+  name: c.name,
+  value: CLASS_SHARE[c.id],
+  color: c.color,
+}));
 
 const dataCards = [
   { label: "Total Images", value: "4,005", sub: "MappingAfrica v2.0.0" },
@@ -67,7 +71,11 @@ export default function DatasetSection() {
             <ResponsiveContainer width="100%" height={220}>
               <PieChart>
                 <Pie data={classData} cx="50%" cy="50%" innerRadius={55} outerRadius={85} paddingAngle={3} dataKey="value">
-                  {classData.map((e, i) => <Cell key={i} fill={e.color} />)}
+                  {/* Stroke keeps the near-black null class visible on the dark card
+                      without misreporting its fill. */}
+                  {classData.map((e, i) => (
+                    <Cell key={i} fill={e.color} stroke="#64748b" strokeWidth={1} />
+                  ))}
                 </Pie>
                 <Tooltip
                   contentStyle={{ background: "#1e293b", border: "1px solid #334155", borderRadius: 8 }}
@@ -83,11 +91,7 @@ export default function DatasetSection() {
         <div className="mt-6 bg-slate-800/40 border border-slate-700/50 rounded-2xl p-5">
           <h3 className="text-white font-semibold mb-4">Segmentation Classes</h3>
           <div className="grid sm:grid-cols-3 gap-4">
-            {[
-              { color: "#3c3c3c", name: "Null / Background", desc: "No label data available" },
-              { color: "#22c55e", name: "Agricultural Field (Class 1)", desc: "Cultivated agricultural land" },
-              { color: "#1e90ff", name: "Agricultural Field (Class 2)", desc: "Cultivated agricultural land" },
-            ].map((c) => (
+            {CLASS_LEGEND.map((c) => (
               <div key={c.name} className="flex items-start gap-3">
                 <div className="w-4 h-4 rounded mt-0.5 flex-shrink-0" style={{ backgroundColor: c.color }} />
                 <div>

@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { ChevronLeft, ChevronRight, Eye } from "lucide-react";
 import { SectionHeader } from "./Task1Section";
-import { SAMPLE_IDS } from "../data/project";
+import { SAMPLE_IDS, CLASS_LEGEND } from "../data/project";
 
 const PAGE_SIZE = 6;
 
@@ -85,20 +85,16 @@ function Modal({ sampleId, onClose }) {
         </div>
 
         <div className="mt-4 flex gap-2 flex-wrap">
-          {[
-            { color: "#3c3c3c", label: "Null / Background" },
-            { color: "#22c55e", label: "Agricultural Field (Class 1)" },
-            { color: "#1e90ff", label: "Agricultural Field (Class 2)" },
-          ].map(({ color, label }) => (
+          {CLASS_LEGEND.map(({ color, name }) => (
             <span
-              key={label}
+              key={name}
               className="flex items-center gap-1.5 text-xs text-slate-400 bg-slate-800 rounded-full px-3 py-1"
             >
               <span
                 className="w-2.5 h-2.5 rounded-full flex-shrink-0"
                 style={{ backgroundColor: color }}
               />
-              {label}
+              {name}
             </span>
           ))}
         </div>
@@ -150,14 +146,10 @@ export default function PredictionsGallery() {
         </div>
 
         <div className="mt-6 bg-slate-800/40 border border-slate-700/50 rounded-xl p-4 flex flex-wrap gap-4 justify-center">
-          {[
-            { color: "#3c3c3c", label: "Null / Background" },
-            { color: "#22c55e", label: "Agricultural Field (Class 1)" },
-            { color: "#1e90ff", label: "Agricultural Field (Class 2)" },
-          ].map(({ color, label }) => (
-            <div key={label} className="flex items-center gap-2 text-sm text-slate-400">
+          {CLASS_LEGEND.map(({ color, name }) => (
+            <div key={name} className="flex items-center gap-2 text-sm text-slate-400">
               <span className="w-4 h-4 rounded flex-shrink-0" style={{ backgroundColor: color }} />
-              {label}
+              {name}
             </div>
           ))}
         </div>
