@@ -1,5 +1,5 @@
 import { SectionHeader } from "./Task1Section";
-import { CLASS_LEGEND } from "../data/project";
+import { CLASS_LEGEND, CLASS_SHARE } from "../data/project";
 import { PieChart, Pie, Cell, Tooltip, ResponsiveContainer, Legend } from "recharts";
 
 const splitData = [
@@ -8,9 +8,6 @@ const splitData = [
   { name: "Test", value: 50, color: "#10b981" },
 ];
 
-// Approximate pixel proportions, keyed to the class ids in CLASS_LEGEND so the
-// chart and the legend below it can never drift apart.
-const CLASS_SHARE = { 0: 13, 1: 72, 2: 15 };
 const classData = CLASS_LEGEND.map((c) => ({
   name: c.name,
   value: CLASS_SHARE[c.id],
@@ -23,7 +20,7 @@ const dataCards = [
   { label: "Fine-tune Set", value: "650", sub: "500 train + 100 val + 50 test" },
   { label: "Countries", value: "5+", sub: "Angola, Zambia, Malawi…" },
   { label: "Temporal Range", value: "2017–2023", sub: "Multi-year satellite imagery" },
-  { label: "Task", value: "3-class", sub: "Agricultural Field / Null" },
+  { label: "Task", value: "3-class", sub: "Non-field / interior / boundary" },
 ];
 
 export default function DatasetSection() {
@@ -67,7 +64,7 @@ export default function DatasetSection() {
 
           <div className="bg-slate-800/40 border border-slate-700/50 rounded-2xl p-6">
             <h3 className="text-white font-semibold mb-1">Class Distribution</h3>
-            <p className="text-slate-500 text-xs mb-4">Approximate pixel-level proportions</p>
+            <p className="text-slate-500 text-xs mb-4">Mean pixel share across the 50 test tiles</p>
             <ResponsiveContainer width="100%" height={220}>
               <PieChart>
                 <Pie data={classData} cx="50%" cy="50%" innerRadius={55} outerRadius={85} paddingAngle={3} dataKey="value">

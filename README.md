@@ -52,7 +52,7 @@ Training ran for 10 epochs with Adam (lr=1e-4) and CrossEntropyLoss on 500 sampl
 
 - **Image size** — 256×256 pixels, 4 spectral channels
 - **Region** — Zambia (ZM)
-- **Classes** — 3 (Null / Background, Agricultural Field Class 1, Agricultural Field Class 2)
+- **Classes** — 3 (non-field, field interior, field boundary)
 
 ---
 
