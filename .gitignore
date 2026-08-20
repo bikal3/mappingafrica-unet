@@ -18,7 +18,9 @@ venv/
 dist/
 build/
 .eggs/
-data/
+# Anchored: this is the top-level dataset directory. Unanchored, this rule
+# also matched demo/frontend/src/data/ and silently excluded source files.
+/data/
 
 # ── Jupyter ────────────────────────────────────────────────────────────────────
 .ipynb_checkpoints/
