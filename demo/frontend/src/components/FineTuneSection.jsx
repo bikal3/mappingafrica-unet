@@ -34,7 +34,6 @@ const whyItems = [
 export default function FineTuneSection() {
   const frozen = layers.filter((l) => l.frozen).length;
   const trainable = layers.filter((l) => !l.frozen).length;
-  const totalParams = 497;
 
   return (
     <section id="finetuning" className="py-24 px-6 bg-slate-900/40">
