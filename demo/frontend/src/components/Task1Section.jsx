@@ -1,3 +1,4 @@
+import { Fragment } from "react";
 import { CheckCircle2 } from "lucide-react";
 
 const steps = [
@@ -77,8 +78,8 @@ export default function Task1Section() {
             <div key={i} className="text-center text-xs text-slate-500 pb-1">{i}</div>
           ))}
           {confusionColors.map((row, i) => (
-            <>
-              <div key={`label-${i}`} className="text-xs text-slate-500 pr-2 flex items-center justify-end">{i}</div>
+            <Fragment key={i}>
+              <div className="text-xs text-slate-500 pr-2 flex items-center justify-end">{i}</div>
               {row.map((v, j) => (
                 <div
                   key={j}
@@ -93,7 +94,7 @@ export default function Task1Section() {
                   {v}
                 </div>
               ))}
-            </>
+            </Fragment>
           ))}
         </div>
         <p className="text-slate-600 text-xs mt-3">Approximate confusion matrix (values represent % of samples per class)</p>
