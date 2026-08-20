@@ -5,8 +5,11 @@ import { SAMPLE_IDS, CLASS_LEGEND } from "../data/project";
 
 const PAGE_SIZE = 6;
 
+// BASE_URL is "/" locally and "/<repo>/" on GitHub Pages, always with a
+// trailing slash. A document-relative "./images/..." would instead depend on
+// the visitor's URL carrying one.
 function imgPath(type, sampleId) {
-  return `./images/${type}/${sampleId}.png`;
+  return `${import.meta.env.BASE_URL}images/${type}/${sampleId}.png`;
 }
 
 function SampleCard({ sampleId, onClick }) {
