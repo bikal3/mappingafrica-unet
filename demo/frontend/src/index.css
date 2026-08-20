@@ -23,5 +23,20 @@ body {
 ::-webkit-scrollbar-track { background: #1e293b; }
 ::-webkit-scrollbar-thumb { background: #475569; border-radius: 3px; }
 
-/* Smooth scroll */
-html { scroll-behavior: smooth; }
+/* Smooth scroll, but only for visitors who have not asked for less motion */
+@media (prefers-reduced-motion: no-preference) {
+  html { scroll-behavior: smooth; }
+}
+
+/* Neutralise the hero's pulsing dot and bouncing arrow, and every
+   transition-* utility, for anyone who has asked for reduced motion. */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
