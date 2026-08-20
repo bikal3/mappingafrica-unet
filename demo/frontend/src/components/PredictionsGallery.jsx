@@ -1,5 +1,5 @@
 import { useState, useRef, useEffect } from "react";
-import { ChevronLeft, ChevronRight, Eye } from "lucide-react";
+import { ChevronLeft, ChevronRight, Eye, ImageOff } from "lucide-react";
 import { SectionHeader } from "./Task1Section";
 import { SAMPLE_IDS, CLASS_LEGEND } from "../data/project";
 
@@ -12,6 +12,36 @@ function imgPath(type, sampleId) {
   return `${import.meta.env.BASE_URL}images/${type}/${sampleId}.png`;
 }
 
+// Renders a placeholder instead of a broken-image icon when a tile is missing.
+function Tile({ src, alt, className, style }) {
+  const [failed, setFailed] = useState(false);
+
+  if (failed) {
+    return (
+      <div
+        role="img"
+        aria-label={`${alt} — image unavailable`}
+        title="Image unavailable"
+        className={`${className} flex items-center justify-center bg-slate-900`}
+      >
+        <ImageOff size={18} className="text-slate-600" />
+      </div>
+    );
+  }
+
+  return (
+    <img
+      src={src}
+      alt={alt}
+      loading="lazy"
+      decoding="async"
+      onError={() => setFailed(true)}
+      className={className}
+      style={style}
+    />
+  );
+}
+
 function SampleCard({ sampleId, onClick }) {
   return (
     <button
@@ -22,9 +52,9 @@ function SampleCard({ sampleId, onClick }) {
     >
       <div className="grid grid-cols-2">
         <div className="relative aspect-square overflow-hidden">
-          <img
+          <Tile
             src={imgPath("satellite", sampleId)}
-            alt="Satellite"
+            alt={`Satellite tile ${sampleId}`}
             className="w-full h-full object-cover"
           />
           <span className="absolute top-1 left-1 text-xs bg-slate-900/80 text-slate-300 px-1.5 py-0.5 rounded">
@@ -32,9 +62,9 @@ function SampleCard({ sampleId, onClick }) {
           </span>
         </div>
         <div className="relative aspect-square overflow-hidden">
-          <img
+          <Tile
             src={imgPath("predictions", sampleId)}
-            alt="Prediction"
+            alt={`UNet prediction for ${sampleId}`}
             className="w-full h-full object-cover"
             style={{ imageRendering: "pixelated" }}
           />
@@ -96,9 +126,9 @@ function Modal({ sampleId, onClose }) {
             { type: "predictions", label: "UNet Prediction", color: "text-blue-400" },
           ].map(({ type, label, color }) => (
             <div key={type}>
-              <img
+              <Tile
                 src={imgPath(type, sampleId)}
-                alt={label}
+                alt={`${label} for ${sampleId}`}
                 className="w-full aspect-square rounded-lg object-cover border border-slate-700"
                 style={{ imageRendering: type !== "satellite" ? "pixelated" : "auto" }}
               />
