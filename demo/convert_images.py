@@ -96,39 +96,36 @@ def main():
     os.makedirs(pred_dir, exist_ok=True)
     os.makedirs(lbl_dir, exist_ok=True)
 
-    ok = err = 0
-    for sid in SAMPLE_IDS:
-        # Satellite image
-        src = os.path.join(IMAGES_DIR, f"{sid}.tif")
-        dst = os.path.join(sat_dir, f"{sid}.png")
-        if os.path.exists(src):
-            save_png(tif_to_rgb(src), dst)
-        else:
-            print(f"  [WARN] satellite missing: {sid}")
+    written = {"satellite": 0, "predictions": 0, "labels": 0}
+    skipped = {"satellite": [], "predictions": [], "labels": []}
 
-        # Prediction mask
-        src = os.path.join(PREDICTIONS_DIR, f"{sid}_pred.tif")
-        dst = os.path.join(pred_dir, f"{sid}.png")
-        if os.path.exists(src):
-            save_png(mask_to_rgb(src), dst)
-        else:
-            print(f"  [WARN] prediction missing: {sid}")
+    for i, sid in enumerate(SAMPLE_IDS, start=1):
+        jobs = [
+            ("satellite", os.path.join(IMAGES_DIR, f"{sid}.tif"), sat_dir, tif_to_rgb),
+            ("predictions", os.path.join(PREDICTIONS_DIR, f"{sid}_pred.tif"), pred_dir, mask_to_rgb),
+            ("labels", label_map.get(sid.rsplit("_", 1)[0], ""), lbl_dir, mask_to_rgb),
+        ]
+        for kind, src, out_dir, convert in jobs:
+            if src and os.path.exists(src):
+                save_png(convert(src), os.path.join(out_dir, f"{sid}.png"))
+                written[kind] += 1
+            else:
+                skipped[kind].append(sid)
+                print(f"  [WARN] {kind} missing: {sid}")
 
-        # Label mask
-        base_name = sid.split("_2021")[0]
-        src = label_map.get(base_name, "")
-        dst = os.path.join(lbl_dir, f"{sid}.png")
-        if src and os.path.exists(src):
-            save_png(mask_to_rgb(src), dst)
-        else:
-            print(f"  [WARN] label missing: {sid}")
+        print(f"  [{i}/{len(SAMPLE_IDS)}] {sid}")
 
-        ok += 1
-        print(f"  [{ok}/{len(SAMPLE_IDS)}] {sid}")
+    total_skipped = sum(len(v) for v in skipped.values())
+    print(f"\nSaved to {OUT_DIR}")
+    for kind in written:
+        print(f"  {kind:12} {written[kind]}/{len(SAMPLE_IDS)} written, {len(skipped[kind])} skipped")
 
-    print(f"\nDone. Saved to {OUT_DIR}")
-    print(f"satellite: {len(os.listdir(sat_dir))} | predictions: {len(os.listdir(pred_dir))} | labels: {len(os.listdir(lbl_dir))}")
+    if total_skipped:
+        print(f"\nFAILED: {total_skipped} file(s) could not be converted.")
+        return 1
+    print(f"\nDone. All {len(SAMPLE_IDS) * 3} files written.")
+    return 0
 
 
 if __name__ == "__main__":
-    main()
+    raise SystemExit(main())
