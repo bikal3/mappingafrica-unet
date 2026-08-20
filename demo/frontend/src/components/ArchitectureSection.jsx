@@ -1,19 +1,19 @@
 import { SectionHeader } from "./Task1Section";
 
 const encoderLayers = [
-  { name: "enc1", channels: "4→64", size: "256" },
-  { name: "enc2", channels: "64→128", size: "128" },
-  { name: "enc3", channels: "128→256", size: "64" },
-  { name: "enc4", channels: "256→512", size: "32" },
-  { name: "enc5", channels: "512→1024", size: "16" },
+  { name: "enc1", channels: "4→64" },
+  { name: "enc2", channels: "64→128" },
+  { name: "enc3", channels: "128→256" },
+  { name: "enc4", channels: "256→512" },
+  { name: "enc5", channels: "512→1024" },
 ];
 
 const decoderLayers = [
-  { name: "dec5", channels: "2048→1024", size: "16" },
-  { name: "dec4", channels: "1024→512", size: "32" },
-  { name: "dec3", channels: "512→256", size: "64" },
-  { name: "dec2", channels: "256→128", size: "128" },
-  { name: "dec1", channels: "128→64", size: "256" },
+  { name: "dec5", channels: "2048→1024" },
+  { name: "dec4", channels: "1024→512" },
+  { name: "dec3", channels: "512→256" },
+  { name: "dec2", channels: "256→128" },
+  { name: "dec1", channels: "128→64" },
 ];
 
 export default function ArchitectureSection() {
