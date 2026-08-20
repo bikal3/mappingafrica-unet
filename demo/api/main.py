@@ -12,10 +12,19 @@ from fastapi.staticfiles import StaticFiles
 
 app = FastAPI(title="UNet Satellite Segmentation Demo")
 
+# This service reads from the local filesystem and is only ever meant to be
+# reached by the Vite dev server, so it does not accept any origin.
+DEV_ORIGINS = [
+    "http://localhost:5173",
+    "http://127.0.0.1:5173",
+    "http://localhost:4173",   # vite preview
+    "http://127.0.0.1:4173",
+]
+
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=["*"],
-    allow_methods=["*"],
+    allow_origins=DEV_ORIGINS,
+    allow_methods=["GET"],
     allow_headers=["*"],
 )
 
@@ -169,7 +178,7 @@ def get_prediction(sample_id: str):
 def get_label(sample_id: str):
     if sample_id not in SAMPLE_ID_SET:
         raise HTTPException(404, "Sample not found")
-    base_name = sample_id.split("_2021")[0]
+    base_name = sample_id.rsplit("_", 1)[0]
     label_path = LABEL_MAP.get(base_name)
     if not label_path or not os.path.exists(label_path):
         raise HTTPException(404, f"Label file missing: {sample_id}")
