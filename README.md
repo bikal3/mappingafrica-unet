@@ -88,8 +88,8 @@ mappingafrica-unet/
     │   ├── src/
     │   │   ├── App.jsx
     │   │   └── components/
-    │   └── public/images/             # Pre-converted PNGs for static deploy
-    ├── convert_images.py              # Converts .tif → PNG for static site
+    │   └── public/images/             # Pre-converted WebP tiles for static deploy
+    ├── convert_images.py              # Converts .tif → WebP for static site
     ├── make_og_image.py               # Builds the social preview image
     ├── check_consistency.py           # Verifies displayed figures vs shipped images
     ├── start.sh                       # Starts both servers (macOS/Linux)
@@ -138,7 +138,7 @@ python demo/check_consistency.py     # figures vs the shipped image files
 
 `check_consistency.py` asserts that the class colours, class shares, sample list
 and training metrics agree across `src/data/project.js`, `demo/api/main.py`,
-`demo/convert_images.py` and the mask PNGs themselves. CI runs both on every
+`demo/convert_images.py` and the mask images themselves. CI runs both on every
 push and pull request, and again before any deploy.
 
 ### Re-generate static images (if raw .tif files are available)
@@ -158,4 +158,5 @@ conda run -n torch-env python demo/convert_images.py
 | Backend (local) | FastAPI, uvicorn |
 | Frontend | React, Vite, Tailwind CSS, Recharts |
 | Deploy | GitHub Actions, GitHub Pages |
+| Images | WebP — lossy q85 for satellite, lossless for masks |
 | Checks | ESLint, `check_consistency.py` |
