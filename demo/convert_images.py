@@ -1,6 +1,12 @@
 """
-Pre-convert all satellite .tif files and prediction/label masks to PNG
+Pre-convert all satellite .tif files and prediction/label masks to WebP
 for static GitHub Pages deployment.
+
+Satellite tiles are photographic, so they are written lossy (q85) — at display
+size the difference from the source is not visible and the files are ~92%
+smaller. Masks carry categorical class colours, so they are written LOSSLESS:
+lossy encoding invents thousands of intermediate colours and would corrupt the
+class data that the legend and check_consistency.py depend on.
 
 Run from the project root directory:
   conda run -n torch-env python demo/convert_images.py
@@ -66,9 +72,10 @@ def mask_to_rgb(path: str) -> np.ndarray:
     return rgb
 
 
-def save_png(arr: np.ndarray, path: str):
+def save_tile(arr: np.ndarray, path: str, lossless: bool):
     os.makedirs(os.path.dirname(path), exist_ok=True)
-    Image.fromarray(arr).save(path, format="PNG", optimize=True)
+    opts = {"lossless": True} if lossless else {"quality": 85}
+    Image.fromarray(arr).save(path, format="WEBP", method=6, **opts)
 
 
 def load_label_map() -> dict:
@@ -101,13 +108,14 @@ def main():
 
     for i, sid in enumerate(SAMPLE_IDS, start=1):
         jobs = [
-            ("satellite", os.path.join(IMAGES_DIR, f"{sid}.tif"), sat_dir, tif_to_rgb),
-            ("predictions", os.path.join(PREDICTIONS_DIR, f"{sid}_pred.tif"), pred_dir, mask_to_rgb),
-            ("labels", label_map.get(sid.rsplit("_", 1)[0], ""), lbl_dir, mask_to_rgb),
+            # kind, source, output dir, converter, lossless
+            ("satellite", os.path.join(IMAGES_DIR, f"{sid}.tif"), sat_dir, tif_to_rgb, False),
+            ("predictions", os.path.join(PREDICTIONS_DIR, f"{sid}_pred.tif"), pred_dir, mask_to_rgb, True),
+            ("labels", label_map.get(sid.rsplit("_", 1)[0], ""), lbl_dir, mask_to_rgb, True),
         ]
-        for kind, src, out_dir, convert in jobs:
+        for kind, src, out_dir, convert, lossless in jobs:
             if src and os.path.exists(src):
-                save_png(convert(src), os.path.join(out_dir, f"{sid}.png"))
+                save_tile(convert(src), os.path.join(out_dir, f"{sid}.webp"), lossless)
                 written[kind] += 1
             else:
                 skipped[kind].append(sid)
