@@ -27,6 +27,7 @@ API_PY = os.path.join(BASE, "demo", "api", "main.py")
 CONVERT_PY = os.path.join(BASE, "demo", "convert_images.py")
 IMAGES = os.path.join(FRONTEND, "public", "images")
 KINDS = ("satellite", "labels", "predictions")
+EXT = ".webp"
 
 # api/main.py names these in snake_case; the JS module in camelCase.
 METRIC_ALIASES = {
@@ -140,12 +141,12 @@ def main():
     for kind in KINDS:
         d = os.path.join(IMAGES, kind)
         missing = [s for s in js["SAMPLE_IDS"]
-                   if not os.path.exists(os.path.join(d, f"{s}.png"))]
-        orphan = ([f[:-4] for f in os.listdir(d) if f.endswith(".png")
-                   and f[:-4] not in set(js["SAMPLE_IDS"])] if os.path.isdir(d) else [])
-        check(f"{kind}: every listed sample has a PNG", not missing,
+                   if not os.path.exists(os.path.join(d, s + EXT))]
+        orphan = ([f[: -len(EXT)] for f in os.listdir(d) if f.endswith(EXT)
+                   and f[: -len(EXT)] not in set(js["SAMPLE_IDS"])] if os.path.isdir(d) else [])
+        check(f"{kind}: every listed sample has an image", not missing,
               f"missing {len(missing)}: {missing[:3]}")
-        check(f"{kind}: no orphaned PNGs", not orphan,
+        check(f"{kind}: no orphaned images", not orphan,
               f"orphaned {len(orphan)}: {orphan[:3]}")
 
     print("\ntraining metrics")
@@ -168,7 +169,7 @@ def main():
         by_hex = {tuple(hex_to_rgb(c["color"])): c["id"] for c in js["CLASS_LEGEND"]}
         for kind in ("labels", "predictions"):
             for sid in js["SAMPLE_IDS"]:
-                p = os.path.join(IMAGES, kind, f"{sid}.png")
+                p = os.path.join(IMAGES, kind, sid + EXT)
                 if not os.path.exists(p):
                     continue
                 im = Image.open(p).convert("RGB")

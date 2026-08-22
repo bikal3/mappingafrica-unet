@@ -13,6 +13,7 @@ from PIL import Image, ImageDraw, ImageFont
 
 BASE = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 IMAGES = os.path.join(BASE, "demo", "frontend", "public", "images")
+# Stays PNG: several social scrapers still do not accept WebP for og:image.
 OUT = os.path.join(BASE, "demo", "frontend", "public", "og-image.png")
 
 SAMPLE = "ZM1717612_2021-08"          # a roughly 40/60 field-to-background tile
@@ -66,7 +67,7 @@ def main():
     left = 64
     label_font = load_font(20)
     for i, (kind, label) in enumerate(PANELS):
-        path = os.path.join(IMAGES, kind, f"{SAMPLE}.png")
+        path = os.path.join(IMAGES, kind, f"{SAMPLE}.webp")
         if not os.path.exists(path):
             raise SystemExit(f"missing {path} — run demo/convert_images.py first")
         resample = Image.NEAREST if kind != "satellite" else Image.LANCZOS
