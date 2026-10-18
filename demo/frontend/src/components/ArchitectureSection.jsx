@@ -110,7 +110,7 @@ function UNetDiagram() {
   return (
     <svg
       viewBox={`0 0 800 ${svgH}`}
-      className="w-full"
+      className="w-full text-slate-400"
       style={{ maxHeight: 340 }}
     >
       {/* Encoder boxes */}
@@ -150,16 +150,16 @@ function UNetDiagram() {
       ))}
 
       {/* Input label */}
-      <text x={encX + (boxW + 20) / 2} y={30} textAnchor="middle" fill="#94a3b8" fontSize={9}>Input (4ch)</text>
-      <line x1={encX + (boxW + 20) / 2} y1={32} x2={encX + (boxW + 20) / 2} y2={encY(0)} stroke="#94a3b8" strokeWidth={1} />
+      <text x={encX + (boxW + 20) / 2} y={30} textAnchor="middle" fill="currentColor" fontSize={9}>Input (4ch)</text>
+      <line x1={encX + (boxW + 20) / 2} y1={32} x2={encX + (boxW + 20) / 2} y2={encY(0)} stroke="currentColor" strokeWidth={1} />
 
       {/* Output label */}
-      <text x={decX + (boxW + 20) / 2} y={30} textAnchor="middle" fill="#94a3b8" fontSize={9}>Output (3ch)</text>
-      <line x1={decX + (boxW + 20) / 2} y1={32} x2={decX + (boxW + 20) / 2} y2={decY(0)} stroke="#94a3b8" strokeWidth={1} />
+      <text x={decX + (boxW + 20) / 2} y={30} textAnchor="middle" fill="currentColor" fontSize={9}>Output (3ch)</text>
+      <line x1={decX + (boxW + 20) / 2} y1={32} x2={decX + (boxW + 20) / 2} y2={decY(0)} stroke="currentColor" strokeWidth={1} />
 
       {/* Skip legend */}
       <line x1={300} y1={svgH - 15} x2={320} y2={svgH - 15} stroke="#f59e0b" strokeWidth={1} strokeDasharray="4,3" />
-      <text x={325} y={svgH - 11} fill="#94a3b8" fontSize={9}>Skip connection</text>
+      <text x={325} y={svgH - 11} fill="currentColor" fontSize={9}>Skip connection</text>
     </svg>
   );
 }

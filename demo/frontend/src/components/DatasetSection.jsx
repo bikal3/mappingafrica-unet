@@ -53,11 +53,11 @@ export default function DatasetSection() {
                   {splitData.map((e, i) => <Cell key={i} fill={e.color} />)}
                 </Pie>
                 <Tooltip
-                  contentStyle={{ background: "#1e293b", border: "1px solid #334155", borderRadius: 8 }}
-                  labelStyle={{ color: "#e2e8f0" }}
+                  contentStyle={{ background: "rgb(var(--slate-800))", border: "1px solid rgb(var(--slate-700))", borderRadius: 8 }}
+                  labelStyle={{ color: "rgb(var(--slate-200))" }}
                   formatter={(v, n) => [`${v} samples`, n]}
                 />
-                <Legend formatter={(v) => <span style={{ color: "#94a3b8", fontSize: 12 }}>{v}</span>} />
+                <Legend formatter={(v) => <span className="text-slate-400 text-xs">{v}</span>} />
               </PieChart>
             </ResponsiveContainer>
           </div>
@@ -75,10 +75,10 @@ export default function DatasetSection() {
                   ))}
                 </Pie>
                 <Tooltip
-                  contentStyle={{ background: "#1e293b", border: "1px solid #334155", borderRadius: 8 }}
+                  contentStyle={{ background: "rgb(var(--slate-800))", border: "1px solid rgb(var(--slate-700))", borderRadius: 8 }}
                   formatter={(v, n) => [`~${v}%`, n]}
                 />
-                <Legend formatter={(v) => <span style={{ color: "#94a3b8", fontSize: 12 }}>{v}</span>} />
+                <Legend formatter={(v) => <span className="text-slate-400 text-xs">{v}</span>} />
               </PieChart>
             </ResponsiveContainer>
           </div>

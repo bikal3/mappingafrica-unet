@@ -21,8 +21,8 @@ const metricData = epochs.map((e, i) => ({
 }));
 
 const tooltipStyle = {
-  contentStyle: { background: "#1e293b", border: "1px solid #334155", borderRadius: 8 },
-  labelStyle: { color: "#e2e8f0" },
+  contentStyle: { background: "rgb(var(--slate-800))", border: "1px solid rgb(var(--slate-700))", borderRadius: 8 },
+  labelStyle: { color: "rgb(var(--slate-200))" },
 };
 
 export default function ResultsSection() {
@@ -55,11 +55,11 @@ export default function ResultsSection() {
         <ChartCard title="Loss Curves" sub="Train and validation loss over 10 epochs">
           <ResponsiveContainer width="100%" height={260}>
             <LineChart data={lossData} margin={{ top: 10, right: 10, left: -10, bottom: 0 }}>
-              <CartesianGrid strokeDasharray="3 3" stroke="#1e293b" />
-              <XAxis dataKey="epoch" tick={{ fill: "#64748b", fontSize: 11 }} label={{ value: "Epoch", position: "insideBottom", offset: -2, fill: "#475569", fontSize: 11 }} />
-              <YAxis tick={{ fill: "#64748b", fontSize: 11 }} domain={[0.38, 0.58]} tickCount={6} />
+              <CartesianGrid strokeDasharray="3 3" stroke="rgb(var(--slate-700))" />
+              <XAxis dataKey="epoch" tick={{ fill: "rgb(var(--slate-500))", fontSize: 11 }} label={{ value: "Epoch", position: "insideBottom", offset: -2, fill: "rgb(var(--slate-500))", fontSize: 11 }} />
+              <YAxis tick={{ fill: "rgb(var(--slate-500))", fontSize: 11 }} domain={[0.38, 0.58]} tickCount={6} />
               <Tooltip {...tooltipStyle} formatter={(v) => v.toFixed(4)} />
-              <Legend formatter={(v) => <span style={{ color: "#94a3b8", fontSize: 12 }}>{v}</span>} />
+              <Legend formatter={(v) => <span className="text-slate-400 text-xs">{v}</span>} />
               <Line type="monotone" dataKey="Train Loss" stroke="#3b82f6" strokeWidth={2} dot={{ r: 3 }} activeDot={{ r: 5 }} />
               <Line type="monotone" dataKey="Val Loss" stroke="#8b5cf6" strokeWidth={2} dot={{ r: 3 }} strokeDasharray="4 2" />
             </LineChart>
@@ -69,11 +69,11 @@ export default function ResultsSection() {
         <ChartCard title="Validation Metrics" sub="Accuracy and mIoU improve over training">
           <ResponsiveContainer width="100%" height={260}>
             <LineChart data={metricData} margin={{ top: 10, right: 10, left: -10, bottom: 0 }}>
-              <CartesianGrid strokeDasharray="3 3" stroke="#1e293b" />
-              <XAxis dataKey="epoch" tick={{ fill: "#64748b", fontSize: 11 }} label={{ value: "Epoch", position: "insideBottom", offset: -2, fill: "#475569", fontSize: 11 }} />
-              <YAxis tick={{ fill: "#64748b", fontSize: 11 }} domain={[35, 90]} unit="%" />
+              <CartesianGrid strokeDasharray="3 3" stroke="rgb(var(--slate-700))" />
+              <XAxis dataKey="epoch" tick={{ fill: "rgb(var(--slate-500))", fontSize: 11 }} label={{ value: "Epoch", position: "insideBottom", offset: -2, fill: "rgb(var(--slate-500))", fontSize: 11 }} />
+              <YAxis tick={{ fill: "rgb(var(--slate-500))", fontSize: 11 }} domain={[35, 90]} unit="%" />
               <Tooltip {...tooltipStyle} formatter={(v) => `${v.toFixed(2)}%`} />
-              <Legend formatter={(v) => <span style={{ color: "#94a3b8", fontSize: 12 }}>{v}</span>} />
+              <Legend formatter={(v) => <span className="text-slate-400 text-xs">{v}</span>} />
               <Line type="monotone" dataKey="Val Accuracy" stroke="#10b981" strokeWidth={2} dot={{ r: 3 }} />
               <Line type="monotone" dataKey="Val mIoU" stroke="#f59e0b" strokeWidth={2} dot={{ r: 3 }} strokeDasharray="4 2" />
             </LineChart>

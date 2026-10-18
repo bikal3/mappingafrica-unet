@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import { Satellite, Menu, X } from "lucide-react";
+import { Satellite, Menu, X, Sun, Moon } from "lucide-react";
 
 const links = [
   { href: "#overview", label: "Overview" },
@@ -14,6 +14,18 @@ const links = [
 export default function Navbar() {
   const [scrolled, setScrolled] = useState(false);
   const [open, setOpen] = useState(false);
+  const [theme, setTheme] = useState(() => document.documentElement.dataset.theme);
+
+  const toggleTheme = () => {
+    const next = theme === "dark" ? "light" : "dark";
+    document.documentElement.dataset.theme = next;
+    try {
+      localStorage.setItem("theme", next);
+    } catch {
+      // Storage can be blocked (private window); the switch still works for this visit.
+    }
+    setTheme(next);
+  };
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 40);
@@ -56,16 +68,28 @@ export default function Navbar() {
           ))}
         </div>
 
-        <button
-          type="button"
-          onClick={() => setOpen((v) => !v)}
-          aria-expanded={open}
-          aria-controls="nav-menu"
-          aria-label={open ? "Close menu" : "Open menu"}
-          className="md:hidden -mr-1 p-1 text-slate-300 hover:text-white transition-colors"
-        >
-          {open ? <X size={20} /> : <Menu size={20} />}
-        </button>
+        <div className="flex items-center gap-2 -mr-1">
+          <button
+            type="button"
+            onClick={toggleTheme}
+            aria-label={theme === "dark" ? "Switch to light theme" : "Switch to dark theme"}
+            title={theme === "dark" ? "Switch to light theme" : "Switch to dark theme"}
+            className="p-1.5 rounded-lg text-slate-300 hover:text-white hover:bg-slate-800/60 transition-colors"
+          >
+            {theme === "dark" ? <Sun size={18} /> : <Moon size={18} />}
+          </button>
+
+          <button
+            type="button"
+            onClick={() => setOpen((v) => !v)}
+            aria-expanded={open}
+            aria-controls="nav-menu"
+            aria-label={open ? "Close menu" : "Open menu"}
+            className="md:hidden p-1 text-slate-300 hover:text-white transition-colors"
+          >
+            {open ? <X size={20} /> : <Menu size={20} />}
+          </button>
+        </div>
       </div>
 
       <div

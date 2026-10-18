@@ -88,7 +88,7 @@ export default function Task1Section() {
                     backgroundColor: i === j
                       ? `rgba(34,197,94,${v / maxVal * 0.8})`
                       : v > 0 ? `rgba(239,68,68,${v / maxVal})` : "transparent",
-                    color: v > 5 ? "white" : "#64748b",
+                    color: v > 5 ? "white" : "rgb(var(--slate-500))",
                   }}
                 >
                   {v}

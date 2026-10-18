@@ -2,14 +2,79 @@
 @tailwind components;
 @tailwind utilities;
 
+/* Theme palette. The slate scale is read through these variables (see
+   tailwind.config.js), so the components never name a theme. index.html sets
+   data-theme before first paint. Dark is the default. */
+:root,
+:root[data-theme="dark"] {
+  color-scheme: dark;
+  --slate-50: 248 250 252;
+  --slate-100: 241 245 249;
+  --slate-200: 226 232 240;
+  --slate-300: 203 213 225;
+  --slate-400: 148 163 184;
+  /* 500 and 600 are lifted from stock slate so muted text clears WCAG AA on the cards. */
+  --slate-500: 124 138 160;
+  --slate-600: 148 163 184;
+  --slate-700: 51 65 85;
+  --slate-800: 30 41 59;
+  --slate-900: 15 23 42;
+  --slate-950: 2 6 23;
+}
+
+:root[data-theme="light"] {
+  color-scheme: light;
+  --slate-50: 15 23 42;
+  --slate-100: 30 41 59;
+  --slate-200: 30 41 59;
+  --slate-300: 51 65 85;
+  --slate-400: 71 85 105;
+  --slate-500: 100 116 139;
+  --slate-600: 100 116 139;
+  --slate-700: 203 213 225;
+  --slate-800: 255 255 255;
+  --slate-900: 241 245 249;
+  --slate-950: 248 250 252;
+}
+
+/* Light-mode fixes for classes that are hard-coded to light text on dark.
+   Accents are darkened so they stay readable on white. */
+:root[data-theme="light"] .text-white,
+:root[data-theme="light"] .hover\:text-white:hover {
+  color: #0f172a;
+}
+:root[data-theme="light"] .text-blue-400,
+:root[data-theme="light"] .hover\:text-blue-400:hover {
+  color: #2563eb;
+}
+:root[data-theme="light"] .text-blue-300,
+:root[data-theme="light"] .hover\:text-blue-300:hover {
+  color: #1d4ed8;
+}
+:root[data-theme="light"] .text-green-400,
+:root[data-theme="light"] .text-green-300 {
+  color: #15803d;
+}
+:root[data-theme="light"] .text-purple-400,
+:root[data-theme="light"] .text-purple-300 {
+  color: #9333ea;
+}
+:root[data-theme="light"] .text-amber-400,
+:root[data-theme="light"] .text-amber-300 {
+  color: #b45309;
+}
+:root[data-theme="light"] .from-blue-400 {
+  --tw-gradient-from: #2563eb;
+}
+
 * {
   box-sizing: border-box;
 }
 
 body {
   margin: 0;
-  background-color: #0f172a;
-  color: #e2e8f0;
+  background-color: rgb(var(--slate-950));
+  color: rgb(var(--slate-200));
   font-family: system-ui, -apple-system, sans-serif;
   -webkit-font-smoothing: antialiased;
 }
@@ -20,8 +85,8 @@ body {
 
 /* Custom scrollbar */
 ::-webkit-scrollbar { width: 6px; }
-::-webkit-scrollbar-track { background: #1e293b; }
-::-webkit-scrollbar-thumb { background: #475569; border-radius: 3px; }
+::-webkit-scrollbar-track { background: rgb(var(--slate-800)); }
+::-webkit-scrollbar-thumb { background: rgb(var(--slate-700)); border-radius: 3px; }
 
 /* Smooth scroll, but only for visitors who have not asked for less motion */
 @media (prefers-reduced-motion: no-preference) {
