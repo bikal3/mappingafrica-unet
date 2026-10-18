@@ -1,6 +1,6 @@
 import { useState, useRef, useEffect } from "react";
 import { ChevronLeft, ChevronRight, Eye, ImageOff } from "lucide-react";
-import { SectionHeader } from "./Task1Section";
+import SectionHeader from "./SectionHeader";
 import { SAMPLE_IDS, CLASS_LEGEND } from "../data/project";
 
 const PAGE_SIZE = 6;
@@ -174,7 +174,7 @@ export default function PredictionsGallery() {
   const pageSamples = SAMPLE_IDS.slice(page * PAGE_SIZE, (page + 1) * PAGE_SIZE);
 
   return (
-    <section id="gallery" className="py-24 px-6 bg-slate-900/40">
+    <section id="gallery" className="py-16 md:py-24 px-6 bg-slate-900/40">
       <div className="max-w-7xl mx-auto">
         <SectionHeader
           badge="Inference Output"

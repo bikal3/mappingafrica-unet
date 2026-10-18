@@ -63,7 +63,7 @@ export default function HeroSection() {
         </div>
 
         <a
-          href="#task1"
+          href="#dataset"
           className="inline-flex items-center gap-2 mt-10 text-slate-500 hover:text-white transition-colors text-sm"
         >
           Explore the project

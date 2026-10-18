@@ -1,4 +1,4 @@
-import { SectionHeader } from "./Task1Section";
+import SectionHeader from "./SectionHeader";
 
 const encoderLayers = [
   { name: "enc1", channels: "4→64" },
@@ -18,7 +18,7 @@ const decoderLayers = [
 
 export default function ArchitectureSection() {
   return (
-    <section id="architecture" className="py-24 px-6 max-w-7xl mx-auto">
+    <section id="architecture" className="py-16 md:py-24 px-6 max-w-7xl mx-auto">
       <SectionHeader
         badge="Architecture"
         title="UNet Semantic Segmentation"
@@ -116,25 +116,25 @@ function UNetDiagram() {
       {/* Encoder boxes */}
       {encoderLayers.map((l, i) => (
         <g key={l.name}>
-          <rect x={encX} y={encY(i)} width={boxW + 20} height={boxH} rx={4} fill="#1e3a5f" stroke="#3b82f6" strokeWidth={1} />
-          <text x={encX + (boxW + 20) / 2} y={encY(i) + 12} textAnchor="middle" fill="#93c5fd" fontSize={8} fontFamily="monospace">{l.name}</text>
-          <text x={encX + (boxW + 20) / 2} y={encY(i) + 23} textAnchor="middle" fill="#64748b" fontSize={7} fontFamily="monospace">{l.channels}</text>
+          <rect className="unet-enc" x={encX} y={encY(i)} width={boxW + 20} height={boxH} rx={4} fill="#1e3a5f" stroke="#3b82f6" strokeWidth={1} />
+          <text x={encX + (boxW + 20) / 2} y={encY(i) + 12} className="unet-enc-name" textAnchor="middle" fill="#93c5fd" fontSize={8} fontFamily="monospace">{l.name}</text>
+          <text x={encX + (boxW + 20) / 2} y={encY(i) + 23} className="unet-meta" textAnchor="middle" fill="#64748b" fontSize={7} fontFamily="monospace">{l.channels}</text>
           {/* Arrow down */}
           {i < 4 && <line x1={encX + (boxW + 20) / 2} y1={encY(i) + boxH} x2={encX + (boxW + 20) / 2} y2={encY(i + 1)} stroke="#3b82f6" strokeWidth={1} strokeDasharray="2,2" />}
         </g>
       ))}
 
       {/* Bottleneck */}
-      <rect x={bottleX - 10} y={encY(4) + boxH + 20} width={100} height={boxH + 10} rx={4} fill="#3b1d6e" stroke="#8b5cf6" strokeWidth={1.5} />
-      <text x={bottleX + 40} y={encY(4) + boxH + 33} textAnchor="middle" fill="#c4b5fd" fontSize={9} fontFamily="monospace">bottleneck</text>
-      <text x={bottleX + 40} y={encY(4) + boxH + 46} textAnchor="middle" fill="#6b7280" fontSize={7} fontFamily="monospace">1024→2048</text>
+      <rect className="unet-bottleneck" x={bottleX - 10} y={encY(4) + boxH + 20} width={100} height={boxH + 10} rx={4} fill="#3b1d6e" stroke="#8b5cf6" strokeWidth={1.5} />
+      <text x={bottleX + 40} y={encY(4) + boxH + 33} className="unet-bottleneck-name" textAnchor="middle" fill="#c4b5fd" fontSize={9} fontFamily="monospace">bottleneck</text>
+      <text x={bottleX + 40} y={encY(4) + boxH + 46} className="unet-meta" textAnchor="middle" fill="#6b7280" fontSize={7} fontFamily="monospace">1024→2048</text>
 
       {/* Decoder boxes */}
       {decoderLayers.map((l, i) => (
         <g key={l.name}>
-          <rect x={decX} y={decY(i)} width={boxW + 20} height={boxH} rx={4} fill="#1a3a2e" stroke="#10b981" strokeWidth={1} />
-          <text x={decX + (boxW + 20) / 2} y={decY(i) + 12} textAnchor="middle" fill="#6ee7b7" fontSize={8} fontFamily="monospace">{l.name}</text>
-          <text x={decX + (boxW + 20) / 2} y={decY(i) + 23} textAnchor="middle" fill="#64748b" fontSize={7} fontFamily="monospace">{l.channels}</text>
+          <rect className="unet-dec" x={decX} y={decY(i)} width={boxW + 20} height={boxH} rx={4} fill="#1a3a2e" stroke="#10b981" strokeWidth={1} />
+          <text x={decX + (boxW + 20) / 2} y={decY(i) + 12} className="unet-dec-name" textAnchor="middle" fill="#6ee7b7" fontSize={8} fontFamily="monospace">{l.name}</text>
+          <text x={decX + (boxW + 20) / 2} y={decY(i) + 23} className="unet-meta" textAnchor="middle" fill="#64748b" fontSize={7} fontFamily="monospace">{l.channels}</text>
           {/* Arrow up */}
           {i < 4 && <line x1={decX + (boxW + 20) / 2} y1={decY(i) + boxH} x2={decX + (boxW + 20) / 2} y2={decY(i + 1)} stroke="#10b981" strokeWidth={1} strokeDasharray="2,2" />}
         </g>

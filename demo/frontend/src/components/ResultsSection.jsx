@@ -1,7 +1,7 @@
 import {
   LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer,
 } from "recharts";
-import { SectionHeader } from "./Task1Section";
+import SectionHeader from "./SectionHeader";
 import { EPOCHS, TRAINING_METRICS, FINAL_METRICS } from "../data/project";
 import { TrendingDown, TrendingUp } from "lucide-react";
 
@@ -27,7 +27,7 @@ const tooltipStyle = {
 
 export default function ResultsSection() {
   return (
-    <section id="results" className="py-24 px-6 max-w-7xl mx-auto">
+    <section id="results" className="py-16 md:py-24 px-6 max-w-7xl mx-auto">
       <SectionHeader
         badge="Results"
         title="Training & Evaluation"

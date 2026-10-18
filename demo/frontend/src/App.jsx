@@ -1,7 +1,6 @@
 import { lazy, Suspense } from "react";
 import Navbar from "./components/Navbar";
 import HeroSection from "./components/HeroSection";
-import Task1Section from "./components/Task1Section";
 import ArchitectureSection from "./components/ArchitectureSection";
 import FineTuneSection from "./components/FineTuneSection";
 import PredictionsGallery from "./components/PredictionsGallery";
@@ -42,7 +41,6 @@ export default function App() {
     <div className="min-h-screen bg-slate-950 text-slate-200">
       <Navbar />
       <HeroSection />
-      <Task1Section />
       <Suspense fallback={<SectionPlaceholder id="dataset" />}>
         <DatasetSection />
       </Suspense>

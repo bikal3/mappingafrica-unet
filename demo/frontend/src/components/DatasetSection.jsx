@@ -1,4 +1,4 @@
-import { SectionHeader } from "./Task1Section";
+import SectionHeader from "./SectionHeader";
 import { CLASS_LEGEND, CLASS_SHARE } from "../data/project";
 import { PieChart, Pie, Cell, Tooltip, ResponsiveContainer, Legend } from "recharts";
 
@@ -25,7 +25,7 @@ const dataCards = [
 
 export default function DatasetSection() {
   return (
-    <section id="dataset" className="py-24 px-6 bg-slate-900/40">
+    <section id="dataset" className="py-16 md:py-24 px-6 bg-slate-900/40">
       <div className="max-w-7xl mx-auto">
         <SectionHeader
           badge="Dataset"

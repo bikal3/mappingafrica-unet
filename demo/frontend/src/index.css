@@ -30,7 +30,7 @@
   --slate-300: 51 65 85;
   --slate-400: 71 85 105;
   --slate-500: 100 116 139;
-  --slate-600: 100 116 139;
+  --slate-600: 71 85 105;
   --slate-700: 203 213 225;
   --slate-800: 255 255 255;
   --slate-900: 241 245 249;
@@ -66,6 +66,15 @@
 :root[data-theme="light"] .from-blue-400 {
   --tw-gradient-from: #2563eb;
 }
+
+/* UNet diagram: light tints with dark labels instead of the dark-theme navy/green fills. */
+:root[data-theme="light"] .unet-enc { fill: #dbeafe; stroke: #2563eb; }
+:root[data-theme="light"] .unet-dec { fill: #dcfce7; stroke: #16a34a; }
+:root[data-theme="light"] .unet-bottleneck { fill: #ede9fe; stroke: #7c3aed; }
+:root[data-theme="light"] .unet-enc-name { fill: #1e40af; }
+:root[data-theme="light"] .unet-dec-name { fill: #166534; }
+:root[data-theme="light"] .unet-bottleneck-name { fill: #5b21b6; }
+:root[data-theme="light"] .unet-meta { fill: #334155; }
 
 * {
   box-sizing: border-box;

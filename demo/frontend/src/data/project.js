@@ -29,7 +29,6 @@ export const TRAINING_METRICS = {
 export const FINAL_METRICS = {
   pixelAccuracy: 0.8179,
   miou: 0.4331,
-  mnistAccuracy: 0.9899,
 };
 
 // Segmentation classes. The colours MUST match CLASS_COLORS in

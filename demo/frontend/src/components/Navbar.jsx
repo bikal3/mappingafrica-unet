@@ -3,7 +3,6 @@ import { Satellite, Menu, X, Sun, Moon } from "lucide-react";
 
 const links = [
   { href: "#overview", label: "Overview" },
-  { href: "#task1", label: "MNIST" },
   { href: "#dataset", label: "Dataset" },
   { href: "#architecture", label: "UNet" },
   { href: "#finetuning", label: "Fine-tuning" },

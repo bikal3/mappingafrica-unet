@@ -1,5 +1,5 @@
 import { Lock, Unlock } from "lucide-react";
-import { SectionHeader } from "./Task1Section";
+import SectionHeader from "./SectionHeader";
 
 const layers = [
   { name: "enc1", label: "Encoder 1", channels: "4→64", frozen: true },
@@ -36,7 +36,7 @@ export default function FineTuneSection() {
   const trainable = layers.filter((l) => !l.frozen).length;
 
   return (
-    <section id="finetuning" className="py-24 px-6 bg-slate-900/40">
+    <section id="finetuning" className="py-16 md:py-24 px-6 bg-slate-900/40">
       <div className="max-w-7xl mx-auto">
         <SectionHeader
           badge="Transfer Learning"
