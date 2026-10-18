@@ -1,4 +1,4 @@
-# MappingAfrica UNet — Satellite Agricultural Field Segmentation
+# MappingAfrica UNet: Satellite Agricultural Field Segmentation
 
 Fine-tuning a UNet semantic segmentation model on the [MappingAfrica](https://github.com/agroimpacts/ftw-mappingafrica-integration) dataset to segment agricultural fields in Zambia from 4-channel satellite imagery.
 
@@ -10,8 +10,8 @@ Fine-tuning a UNet semantic segmentation model on the [MappingAfrica](https://gi
 
 This project covers two tasks:
 
-1. **MNIST Inference** — Evaluating a ResNet18 classifier adapted for 1-channel grayscale digit recognition (98.99% test accuracy).
-2. **UNet Fine-tuning** — Transfer learning on a pre-trained UNet segmentation model, freezing the encoder and fine-tuning the decoder on a Zambia subset of the MappingAfrica dataset.
+1. **MNIST Inference**: Evaluating a ResNet18 classifier adapted for 1-channel grayscale digit recognition (98.99% test accuracy).
+2. **UNet Fine-tuning**: Transfer learning on a pre-trained UNet segmentation model, freezing the encoder and fine-tuning the decoder on a Zambia subset of the MappingAfrica dataset.
 
 ---
 
@@ -31,17 +31,17 @@ Training ran for 10 epochs with Adam (lr=1e-4) and CrossEntropyLoss on 500 sampl
 
 **UNet** with 5 encoder blocks, a bottleneck, and 5 decoder blocks:
 
-- **Input** — 4-channel satellite imagery (256×256 px)
-- **Encoder** — DoubleConv blocks with MaxPool downsampling (4→64→128→256→512→1024 channels), frozen during fine-tuning
-- **Bottleneck** — DoubleConv (1024→2048), trainable
-- **Decoder** — ConvTranspose2d upsampling with skip connections (2048→1024→512→256→128→64), trainable
-- **Output** — 1×1 Conv2d → 3 classes (256×256 px)
+- **Input**: 4-channel satellite imagery (256×256 px)
+- **Encoder**: DoubleConv blocks with MaxPool downsampling (4→64→128→256→512→1024 channels), frozen during fine-tuning
+- **Bottleneck**: DoubleConv (1024→2048), trainable
+- **Decoder**: ConvTranspose2d upsampling with skip connections (2048→1024→512→256→128→64), trainable
+- **Output**: 1×1 Conv2d → 3 classes (256×256 px)
 
 ---
 
 ## Dataset
 
-**MappingAfrica v2.0.0 / v1.3.0** — multi-spectral satellite imagery across African countries.
+**MappingAfrica v2.0.0 / v1.3.0** is multi-spectral satellite imagery across African countries.
 
 | Split | Samples |
 |---|---|
@@ -50,15 +50,15 @@ Training ran for 10 epochs with Adam (lr=1e-4) and CrossEntropyLoss on 500 sampl
 | Fine-tune test | 50 |
 | Original training set | 4,005 |
 
-- **Image size** — 256×256 pixels, 4 spectral channels
-- **Region** — Zambia (ZM)
-- **Classes** — 3, following the Fields of The World convention:
+- **Image size**: 256×256 pixels, 4 spectral channels
+- **Region**: Zambia (ZM)
+- **Classes**: 3, following the Fields of The World convention:
 
 | id | Colour | Class | Mean share of test pixels |
 |---|---|---|---|
-| 0 | `#3c3c3c` | Non-field — land outside any agricultural field | 68.5% |
+| 0 | `#3c3c3c` | Non-field: land outside any agricultural field | 68.5% |
 | 1 | `#228b22` | Field interior | 29.3% |
-| 2 | `#1e90ff` | Field boundary — the edge between adjacent fields | 2.3% |
+| 2 | `#1e90ff` | Field boundary: the edge between adjacent fields | 2.3% |
 
 Class 0 is *not* missing data: `null_prop` is 0.0000 for every row of
 `catalog_fixed.csv`. Class 0 tracks the catalog's `nonfld_prop` and classes 1+2
@@ -158,5 +158,5 @@ conda run -n torch-env python demo/convert_images.py
 | Backend (local) | FastAPI, uvicorn |
 | Frontend | React, Vite, Tailwind CSS, Recharts |
 | Deploy | GitHub Actions, GitHub Pages |
-| Images | WebP — lossy q85 for satellite, lossless for masks |
+| Images | WebP: lossy q85 for satellite, lossless for masks |
 | Checks | ESLint, `check_consistency.py` |

@@ -19,7 +19,7 @@ const layers = [
 const whyItems = [
   {
     title: "Why freeze the encoder?",
-    desc: "The encoder extracts low-level and mid-level features (edges, textures, shapes). These are transferable across geographic regions — no need to retrain them on limited data.",
+    desc: "The encoder extracts low-level and mid-level features (edges, textures, shapes). These are transferable across geographic regions. No need to retrain them on limited data.",
   },
   {
     title: "Why fine-tune the decoder?",
@@ -27,7 +27,7 @@ const whyItems = [
   },
   {
     title: "Why a small learning rate (1e-4)?",
-    desc: "We want gradual updates — large learning rates on a pre-trained model would destroy the useful representations learned during original training.",
+    desc: "We want gradual updates, because large learning rates on a pre-trained model would destroy the useful representations learned during original training.",
   },
 ];
 
@@ -41,7 +41,7 @@ export default function FineTuneSection() {
         <SectionHeader
           badge="Transfer Learning"
           title="Fine-tuning Strategy"
-          sub="Freeze the encoder, fine-tune the decoder — adapting to a new geographic region"
+          sub="Freeze the encoder, fine-tune the decoder, adapting to a new geographic region"
         />
 
         <div className="grid md:grid-cols-2 gap-8 mt-12">

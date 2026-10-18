@@ -22,7 +22,7 @@ export default function ArchitectureSection() {
       <SectionHeader
         badge="Architecture"
         title="UNet Semantic Segmentation"
-        sub="Encoder-decoder with skip connections — 4-channel input, 3-class output"
+        sub="Encoder-decoder with skip connections: 4-channel input, 3-class output"
       />
 
       <div className="mt-12 bg-slate-800/40 border border-slate-700/50 rounded-2xl p-6 overflow-x-auto">

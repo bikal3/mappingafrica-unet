@@ -20,7 +20,7 @@ function Tile({ src, alt, className, style }) {
     return (
       <div
         role="img"
-        aria-label={`${alt} — image unavailable`}
+        aria-label={`${alt}: image unavailable`}
         title="Image unavailable"
         className={`${className} flex items-center justify-center bg-slate-900`}
       >
@@ -179,7 +179,7 @@ export default function PredictionsGallery() {
         <SectionHeader
           badge="Inference Output"
           title="Prediction Gallery"
-          sub="50 test predictions — satellite imagery alongside UNet segmentation masks. Click any card to compare with ground truth."
+          sub="50 test predictions: satellite imagery alongside UNet segmentation masks. Click any card to compare with ground truth."
         />
 
         <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-5 mt-10">

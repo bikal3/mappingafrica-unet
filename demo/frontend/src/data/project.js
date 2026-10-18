@@ -33,7 +33,7 @@ export const FINAL_METRICS = {
 };
 
 // Segmentation classes. The colours MUST match CLASS_COLORS in
-// demo/convert_images.py and demo/api/main.py — they are the colours actually
+// demo/convert_images.py and demo/api/main.py. They are the colours actually
 // painted into the mask PNGs, and this legend is how a reader decodes them.
 export const CLASS_LEGEND = [
   { id: 0, color: "#3c3c3c", name: "Non-field",      desc: "Land outside any agricultural field" },

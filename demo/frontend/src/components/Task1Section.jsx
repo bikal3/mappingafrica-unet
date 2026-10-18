@@ -5,7 +5,7 @@ const steps = [
   "Load MNIST test dataset (normalization: mean=0.1307, std=0.3081)",
   "Adapt ResNet18: input Conv2d(1→64), output Linear(512→10)",
   "Load pre-trained weights, set model.eval()",
-  "Run inference with torch.no_grad() — no gradient tracking",
+  "Run inference with torch.no_grad(), so no gradients are tracked",
   "Count correct predictions across 10,000 test images",
 ];
 
